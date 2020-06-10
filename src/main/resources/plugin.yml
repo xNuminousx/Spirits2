@@ -1,0 +1,34 @@
+name: Spirits2
+version: ${project.version}
+main: me.numin.spirits2.Spirits2
+api-version: 1.13
+depend: [ProjectKorra]
+authors: [Numin]
+description: Spirits reimagined
+
+permissions:
+  bending.spirit:
+    default: true
+    description: Grants access to all Spirit abilities.
+    children:
+      bending.ability.agility: true
+      bending.ability.phase: true
+      bending.ability.possess: true
+      bending.ability.vanish: true
+      bending.command.choose.spirit: true
+  bending.lightspirit:
+    default: op
+    description: Grants access to all LightSpirit abilities.
+    children:
+      bending.ability.alleviate: true
+      bending.ability.orb: true
+      bending.ability.rejuvenate: true
+      bending.ability.shelter: true
+  bending.darkspirit:
+    default: op
+    description: Grants access to all DarkSpirit abilities.
+    children:
+      bending.ability.infest: true
+      bending.ability.intoxicate: true
+      bending.ability.shackle: true
+      bending.ability.strike: true
