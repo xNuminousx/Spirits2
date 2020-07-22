@@ -3,7 +3,7 @@ package me.numin.spirits2.inventories;
 import com.projectkorra.projectkorra.ability.Ability;
 import com.projectkorra.projectkorra.ability.CoreAbility;
 import me.numin.spirits2.abilities.dark.combos.Infest;
-import me.numin.spirits2.abilities.light.DarkBlast;
+import me.numin.spirits2.abilities.dark.DarkBlast;
 import me.numin.spirits2.abilities.light.LightBlast;
 import me.numin.spirits2.abilities.light.combos.Rejuvenate;
 import me.numin.spirits2.abilities.spirit.Dash;

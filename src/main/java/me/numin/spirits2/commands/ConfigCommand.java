@@ -3,6 +3,7 @@ package me.numin.spirits2.commands;
 import com.projectkorra.projectkorra.ability.Ability;
 import com.projectkorra.projectkorra.ability.CoreAbility;
 import com.projectkorra.projectkorra.command.PKCommand;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
@@ -22,17 +23,17 @@ public class ConfigCommand extends PKCommand {
         if (commandSender == null || list == null) return;
 
         if (!commandSender.hasPermission("bending.command.getconfig")) {
-            commandSender.sendMessage("You do not have permission for this command.");
+            commandSender.sendMessage(ChatColor.RED + "You do not have permission for this command.");
             return;
         }
 
         if (list.size() <= 1) {
-            commandSender.sendMessage("Invalid plugin format.");
-            commandSender.sendMessage("Format: /b getconfig <plugin> <ability>");
-            commandSender.sendMessage("");
-            commandSender.sendMessage("Plugins & Aliases:");
-            commandSender.sendMessage("ProjectKorra: projectkorra, pk, korra");
-            commandSender.sendMessage("Spirits: spirits, sp, s");
+            commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Invalid command format!");
+            commandSender.sendMessage("Format: /b config <plugin> <ability>");
+            commandSender.sendMessage(ChatColor.STRIKETHROUGH + "------------------------");
+            commandSender.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Plugins & Aliases:");
+            commandSender.sendMessage(ChatColor.BOLD + "ProjectKorra:" + ChatColor.RESET + " projectkorra, pk, korra");
+            commandSender.sendMessage(ChatColor.BOLD + "Spirits:" + ChatColor.RESET + " spirits, sp, s");
             return;
         } else if (list.get(1) == null) {
             commandSender.sendMessage("That's not a valid ability.");

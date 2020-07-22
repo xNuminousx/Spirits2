@@ -4,6 +4,7 @@ import com.projectkorra.projectkorra.BendingPlayer;
 import com.projectkorra.projectkorra.ability.CoreAbility;
 import me.numin.spirits2.abilities.spirit.Dash;
 import me.numin.spirits2.abilities.spirit.Possess;
+import me.numin.spirits2.abilities.spirit.Vanish;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -72,5 +73,7 @@ public class AbilityListener implements Listener {
 
         if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Possess") && !event.isSneaking() && !CoreAbility.hasAbility(player, Possess.class))
             new Possess(player);
+        else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Vanish"))
+            new Vanish(player);
     }
 }

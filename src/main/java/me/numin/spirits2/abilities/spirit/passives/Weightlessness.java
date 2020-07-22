@@ -5,7 +5,7 @@ import me.numin.spirits2.abilities.SpiritAbility;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-public class Weightlessness extends SpiritAbility implements PassiveAbility {
+public abstract class Weightlessness extends SpiritAbility implements PassiveAbility {
 
     public Weightlessness(Player player) {
         super(player);
@@ -63,11 +63,6 @@ public class Weightlessness extends SpiritAbility implements PassiveAbility {
 
     @Override
     public boolean isInstantiable() {
-        return false;
-    }
-
-    @Override
-    public boolean isProgressable() {
         return false;
     }
 }

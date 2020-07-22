@@ -31,7 +31,7 @@ public class SubElementPicker {
             else if (i == slots / 2)
                 inventory.setItem(i, createItem(Material.NETHER_STAR, "Select your sub-element.", ChatColor.GOLD, null));
             else
-                inventory.setItem(i, createItem(Material.GREEN_STAINED_GLASS_PANE, "", ChatColor.GREEN, null));
+                inventory.setItem(i, createItem(Material.LIGHT_GRAY_STAINED_GLASS_PANE, "SPIRITS 2", ChatColor.GRAY, null));
         }
 
         player.openInventory(inventory);
@@ -41,13 +41,16 @@ public class SubElementPicker {
     private List<String> getItemLore(SubElement element) {
         List<String> lore = new ArrayList<>();
         if (element == SpiritElement.LIGHT_SPIRIT) {
-            lore.add("LightSpirits specialize in healing and defense.");
-            lore.add("- They have small amounts of offense.");
+            lore.add("LightSpirits are peaceful, enlightened creatures.");
+            lore.add("Specializations:");
+            lore.add("- Healing");
+            lore.add("- Defense");
             return lore;
         } else if (element == SpiritElement.DARK_SPIRIT) {
-            lore.add("DarkSpirits specialize in disabling their opponents");
-            lore.add("and dealing damage.");
-            lore.add("- They have little healing potential.");
+            lore.add("DarkSpirits are unbalanced, beacons of chaos.");
+            lore.add("Specializations:");
+            lore.add("- Damage");
+            lore.add("- Speed");
             return lore;
         } else
             return null;

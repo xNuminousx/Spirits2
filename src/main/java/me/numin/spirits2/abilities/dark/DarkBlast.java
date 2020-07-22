@@ -1,4 +1,4 @@
-package me.numin.spirits2.abilities.light;
+package me.numin.spirits2.abilities.dark;
 
 import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ability.AddonAbility;
@@ -51,7 +51,7 @@ public class DarkBlast extends LightAbility implements AddonAbility {
         if (!bPlayer.canBend(this))
             return;
 
-        if (activationType == ActivationType.SHIFT && hasAbility(player, LightBlast.class)) {
+        if (activationType == ActivationType.SHIFT && hasAbility(player, DarkBlast.class)) {
             DarkBlast darkBlast = getAbility(player, DarkBlast.class);
             if (darkBlast.getTarget() != null) {
                 Entity targetedEntity = GeneralMethods.getTargetedEntity(player, darkBlast.getRange());

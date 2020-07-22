@@ -1,6 +1,8 @@
 package me.numin.spirits2;
 
 import com.projectkorra.projectkorra.ability.CoreAbility;
+import me.numin.spirits2.commands.ConfigCommand;
+import me.numin.spirits2.commands.SpiritsCommand;
 import me.numin.spirits2.configuration.Configuration;
 import me.numin.spirits2.listeners.AbilityListener;
 import me.numin.spirits2.listeners.PassiveListener;
@@ -41,7 +43,8 @@ public final class Spirits2 extends JavaPlugin {
     }
 
     public void registerCommands() {
-        //TODO: Implement commands.
+        new ConfigCommand();
+        new SpiritsCommand();
     }
 
     public void registerListeners() {

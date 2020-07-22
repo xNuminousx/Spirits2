@@ -39,8 +39,8 @@ public class FetchSpiritsConfigValues {
         if (elementName == null) return;
 
         String path = ability instanceof ComboAbility ?
-                "Abilities.Spirits." + elementName + ".Combo." + ability.getName() :
-                "Abilities.Spirits." + elementName + "." + ability.getName();
+                "Abilities." + elementName + ".Combo." + ability.getName() :
+                "Abilities." + elementName + "." + ability.getName();
 
         Set<String> keys = Spirits2.getInstance().getConfig().getKeys(true);
 
@@ -54,7 +54,10 @@ public class FetchSpiritsConfigValues {
                 String valueType = parts[parts.length - 1];
                 Object value = Spirits2.getInstance().getConfig().get(key);
 
-                if (value == null || value instanceof MemorySection)
+                if (value == null ||
+                        value instanceof MemorySection ||
+                        valueType.equalsIgnoreCase("Description") ||
+                        valueType.equalsIgnoreCase("Instructions"))
                     continue;
 
                 if (parts.length >= 5) {
