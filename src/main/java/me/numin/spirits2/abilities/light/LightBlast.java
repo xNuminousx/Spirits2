@@ -78,7 +78,7 @@ public class LightBlast extends LightAbility implements AddonAbility {
         potionDuration = 3;
         potionPower = 1;
 
-        blastLocation = player.getEyeLocation().add(0, 1, 0);
+        blastLocation = player.getEyeLocation().add(0, 0, 0);
         direction = player.getLocation().getDirection();
         origin = player.getLocation();
         removalPolicy = new RemovalPolicy(this, player);
@@ -202,7 +202,7 @@ public class LightBlast extends LightAbility implements AddonAbility {
 
     @Override
     public Location getLocation() {
-        return null;
+        return blastLocation;
     }
 
     @Override

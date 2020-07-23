@@ -24,7 +24,7 @@ public class FetchPKConfigValues {
             return;
 
         if (ability == null) {
-            commandSender.sendMessage("That's not a valid ability.");
+            commandSender.sendMessage("That's not a valid ProjectKorra or Spirits ability.");
             return;
         }
 

@@ -31,8 +31,8 @@ public class Dash extends SpiritAbility implements AddonAbility {
     }
 
     public void setFields() {
-        cooldown = 0;
-        push = 1;
+        cooldown = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Dash.Cooldown");
+        push = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Dash.Push");
         location = player.getLocation();
         removalPolicy = new RemovalPolicy(this, player);
         direction = location.getDirection();
@@ -113,11 +113,18 @@ public class Dash extends SpiritAbility implements AddonAbility {
 
     @Override
     public String getDescription() {
-        return StringUtils.formatDescription(AbilityType.MOBILITY, SpiritType.NEUTRAL, "Allows you to dash!");
+        return StringUtils.formatDescription(AbilityType.MOBILITY, SpiritType.NEUTRAL,
+                Spirits2.getInstance().getConfig().getString("Abilities.Neutral.Dash.Description"));
     }
 
     @Override
     public String getInstructions() {
-        return StringUtils.getSpiritColor(SpiritType.NEUTRAL) + "Left-click to dash.";
+        return StringUtils.getSpiritColor(SpiritType.NEUTRAL) +
+                Spirits2.getInstance().getConfig().getString("Abilities.Neutral.Dash.Instructions");
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Spirits2.getInstance().getConfig().getBoolean("Abilities.Neutral.Dash.Enabled");
     }
 }

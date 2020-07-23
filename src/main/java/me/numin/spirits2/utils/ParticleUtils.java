@@ -11,6 +11,18 @@ import org.bukkit.entity.Player;
 
 public class ParticleUtils {
 
+    public static void animatePolygon(Location location, double points, double radius, double height, Particle particle) {
+        for (int i = 0; i < points; i++) {
+            double angle = 360 / points * i;
+            angle = Math.toRadians(angle);
+            double x = radius * Math.cos(angle);
+            double z = radius * Math.sin(angle);
+            location.add(x, height, z);
+            location.getWorld().spawnParticle(particle, location, 1, 0, 0, 0, 0);
+            location.subtract(x, height, z);
+        }
+    }
+
     public static void animateVanish(Entity entity) {
         Location location = entity.getLocation().add(0, 1, 0);
 

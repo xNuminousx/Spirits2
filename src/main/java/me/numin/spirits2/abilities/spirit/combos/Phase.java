@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class Phase extends SpiritAbility implements AddonAbility, ComboAbility {
 
     private GameMode gameMode;
-    private Location origin;
     private RemovalPolicy removalPolicy;
 
     private double minHealth;
@@ -38,21 +37,19 @@ public class Phase extends SpiritAbility implements AddonAbility, ComboAbility {
         if (player.getHealth() < minHealth)
             return;
 
-        if (!removalPolicy.shouldRemove()) {
-            ParticleUtils.animateVanish(player);
-            time = System.currentTimeMillis();
-            start();
-        }
+        ParticleUtils.animateVanish(player);
+        time = System.currentTimeMillis();
+        start();
     }
 
     public void setFields() {
-        cooldown = 0;
-        cooldownMultiplier = (long) 1.5;
-        duration = 5000;
-        origin = player.getLocation();
+        cooldown = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Combo.Phase.Cooldown");
+        cooldownMultiplier = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Combo.Phase.CooldownMultiplier");
+        duration = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Combo.Phase.Duration");
+        minHealth = Spirits2.getInstance().getConfig().getDouble("Abilities.Neutral.Combo.Phase.MinimumHealth");
+
         gameMode = player.getGameMode();
         removalPolicy = new RemovalPolicy(this, player);
-        minHealth = 3;
     }
 
     @Override
@@ -78,6 +75,8 @@ public class Phase extends SpiritAbility implements AddonAbility, ComboAbility {
         ParticleUtils.animateVanish(player);
         player.setGameMode(gameMode);
         bPlayer.addCooldown(this);
+
+        super.remove();
     }
 
     @Override
@@ -136,11 +135,13 @@ public class Phase extends SpiritAbility implements AddonAbility, ComboAbility {
     }
 
     public String getDescription() {
-        return StringUtils.formatDescription(AbilityType.MOBILITY, SpiritType.NEUTRAL, "Use this ability to phase through walls.");
+        return StringUtils.formatDescription(AbilityType.COMBO, SpiritType.NEUTRAL,
+                Spirits2.getInstance().getConfig().getString("Abilities.Neutral.Combo.Phase.Description"));
     }
 
     public String getInstructions() {
-        return StringUtils.getSpiritColor(SpiritType.NEUTRAL) + "Vanish: Left-click > Vanish: Left-click > Fly!";
+        return StringUtils.getSpiritColor(SpiritType.NEUTRAL) +
+                Spirits2.getInstance().getConfig().getString("Abilities.Neutral.Combo.Phase.Instructions");
     }
 
     @Override
@@ -148,11 +149,17 @@ public class Phase extends SpiritAbility implements AddonAbility, ComboAbility {
         return new Phase(player);
     }
 
+    //TODO: Reconsider combo activation.
     @Override
     public ArrayList<AbilityInformation> getCombination() {
         ArrayList<AbilityInformation> combo = new ArrayList<>();
         combo.add(new AbilityInformation("Vanish", ClickType.LEFT_CLICK));
         combo.add(new AbilityInformation("Vanish", ClickType.LEFT_CLICK));
         return combo;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return Spirits2.getInstance().getConfig().getBoolean("Abilities.Neutral.Combo.Phase.Enabled");
     }
 }

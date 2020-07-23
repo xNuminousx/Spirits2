@@ -2,9 +2,12 @@ package me.numin.spirits2.listeners;
 
 import com.projectkorra.projectkorra.BendingPlayer;
 import com.projectkorra.projectkorra.ability.CoreAbility;
+import me.numin.spirits2.abilities.dark.DarkBlast;
+import me.numin.spirits2.abilities.light.LightBlast;
 import me.numin.spirits2.abilities.spirit.Dash;
 import me.numin.spirits2.abilities.spirit.Possess;
 import me.numin.spirits2.abilities.spirit.Vanish;
+import me.numin.spirits2.enumerations.ActivationType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -59,8 +62,12 @@ public class AbilityListener implements Listener {
         if (bPlayer == null)
             return;
 
-        if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Dash") && !bPlayer.isOnCooldown("Dash"))
+        if (bPlayer.getBoundAbilityName().equalsIgnoreCase("DarkBlast") && !CoreAbility.hasAbility(player, DarkBlast.class))
+            new DarkBlast(player, ActivationType.CLICK);
+        else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Dash") && !bPlayer.isOnCooldown("Dash"))
             new Dash(player);
+        else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("LightBlast") && !CoreAbility.hasAbility(player, LightBlast.class))
+            new LightBlast(player, ActivationType.CLICK);
     }
 
     @EventHandler
@@ -71,7 +78,11 @@ public class AbilityListener implements Listener {
         if (event.isCancelled() || bPlayer == null)
             return;
 
-        if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Possess") && !event.isSneaking() && !CoreAbility.hasAbility(player, Possess.class))
+        if (bPlayer.getBoundAbilityName().equalsIgnoreCase("DarkBlast") && event.isSneaking())
+            new DarkBlast(player, ActivationType.SHIFT);
+        else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("LightBlast") && event.isSneaking())
+            new LightBlast(player, ActivationType.SHIFT);
+        else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Possess") && !event.isSneaking() && !CoreAbility.hasAbility(player, Possess.class))
             new Possess(player);
         else if (bPlayer.getBoundAbilityName().equalsIgnoreCase("Vanish"))
             new Vanish(player);

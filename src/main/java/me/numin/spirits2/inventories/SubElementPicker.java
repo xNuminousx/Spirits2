@@ -16,12 +16,9 @@ import java.util.List;
 
 public class SubElementPicker {
 
-    private String inventoryName;
-
     public SubElementPicker(Player player) {
         int slots = 9, lightSlot = 2, darkSlot = 6;
-        inventoryName = "Choose Your Sub-Element";
-        Inventory inventory = Bukkit.createInventory(player, slots, inventoryName);
+        Inventory inventory = Bukkit.createInventory(player, slots, getInventoryName());
 
         for (int i = 0; i < slots; i++) {
             if (i == lightSlot)
@@ -68,6 +65,6 @@ public class SubElementPicker {
     }
 
     public String getInventoryName() {
-        return inventoryName;
+        return "Choose Your Sub-Element";
     }
 }

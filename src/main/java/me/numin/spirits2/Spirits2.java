@@ -4,6 +4,7 @@ import com.projectkorra.projectkorra.ability.CoreAbility;
 import me.numin.spirits2.commands.ConfigCommand;
 import me.numin.spirits2.commands.SpiritsCommand;
 import me.numin.spirits2.configuration.Configuration;
+import me.numin.spirits2.listeners.AbilityHelperListener;
 import me.numin.spirits2.listeners.AbilityListener;
 import me.numin.spirits2.listeners.PassiveListener;
 import me.numin.spirits2.listeners.ProjectKorraListener;
@@ -49,6 +50,7 @@ public final class Spirits2 extends JavaPlugin {
 
     public void registerListeners() {
         getServer().getPluginManager().registerEvents(new AbilityListener(), plugin);
+        getServer().getPluginManager().registerEvents(new AbilityHelperListener(), plugin);
         getServer().getPluginManager().registerEvents(new PassiveListener(), plugin);
         getServer().getPluginManager().registerEvents(new ProjectKorraListener(), plugin);
     }

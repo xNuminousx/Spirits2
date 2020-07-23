@@ -22,7 +22,7 @@ public class ConfigCommand extends PKCommand {
     public void execute(CommandSender commandSender, List<String> list) {
         if (commandSender == null || list == null) return;
 
-        if (!commandSender.hasPermission("bending.command.getconfig")) {
+        if (!commandSender.hasPermission("bending.command.config")) {
             commandSender.sendMessage(ChatColor.RED + "You do not have permission for this command.");
             return;
         }
@@ -30,13 +30,13 @@ public class ConfigCommand extends PKCommand {
         if (list.size() <= 1) {
             commandSender.sendMessage(ChatColor.RED + "" + ChatColor.BOLD + "Invalid command format!");
             commandSender.sendMessage("Format: /b config <plugin> <ability>");
-            commandSender.sendMessage(ChatColor.STRIKETHROUGH + "------------------------");
+            commandSender.sendMessage("");
             commandSender.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Plugins & Aliases:");
-            commandSender.sendMessage(ChatColor.BOLD + "ProjectKorra:" + ChatColor.RESET + " projectkorra, pk, korra");
-            commandSender.sendMessage(ChatColor.BOLD + "Spirits:" + ChatColor.RESET + " spirits, sp, s");
+            commandSender.sendMessage("ProjectKorra: projectkorra, pk, korra");
+            commandSender.sendMessage("Spirits: spirits, sp, s");
             return;
         } else if (list.get(1) == null) {
-            commandSender.sendMessage("That's not a valid ability.");
+            commandSender.sendMessage("That's not a valid ProjectKorra or Spirits ability.");
             return;
         }
 

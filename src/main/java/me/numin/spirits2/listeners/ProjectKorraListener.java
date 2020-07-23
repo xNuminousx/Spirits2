@@ -39,7 +39,7 @@ public class ProjectKorraListener implements Listener {
         Player player = (Player)event.getWhoClicked();
         BendingPlayer bPlayer = BendingPlayer.getBendingPlayer(player);
 
-        if (bPlayer == null)
+        if (bPlayer == null || subPicker == null)
             return;
 
         if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getInventoryName())) {
@@ -72,7 +72,7 @@ public class ProjectKorraListener implements Listener {
         Player player = (Player)event.getPlayer();
         BendingPlayer bPlayer = BendingPlayer.getBendingPlayer(player);
 
-        if (bPlayer == null)
+        if (bPlayer == null || subPicker == null)
             return;
 
         if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getInventoryName()))

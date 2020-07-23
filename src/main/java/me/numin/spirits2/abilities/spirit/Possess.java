@@ -15,6 +15,8 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
+
 
 public class Possess extends SpiritAbility implements AddonAbility {
 
@@ -23,8 +25,9 @@ public class Possess extends SpiritAbility implements AddonAbility {
     private Entity target;
     private GameMode gameMode;
     private Location essence;
-    private LocationUtils locationUtils;
+    private Location origin;
     private RemovalPolicy removalPolicy;
+    private final Vector vector = new Vector(0, 0, 0);
 
     private boolean canPlayEssence;
     private boolean hasStarted;
@@ -47,7 +50,7 @@ public class Possess extends SpiritAbility implements AddonAbility {
         if (target != null) {
             armorStand = initializeArmorStand();
             gameMode = player.getGameMode();
-            locationUtils = new LocationUtils(player.getLocation(), target.getLocation());
+            origin = player.getLocation();
             purple = new Particle.DustOptions(Color.fromRGB(130, 0, 193), 1);
             removalPolicy = new RemovalPolicy(this, player);
             time = System.currentTimeMillis();
@@ -92,7 +95,7 @@ public class Possess extends SpiritAbility implements AddonAbility {
         } else {
             playTargetEffects();
             if (canPlayEssence)
-                playEssence();
+                playEssence(targetLocation);
             else
                 target.getWorld().spawnParticle(Particle.DRAGON_BREATH, target.getLocation(), 1, 0.3, 1, 0.3, 0.02);
         }
@@ -100,14 +103,15 @@ public class Possess extends SpiritAbility implements AddonAbility {
 
     private ArmorStand initializeArmorStand() {
         ArmorStand armorStand = player.getWorld().spawn(player.getLocation(), ArmorStand.class);
-        armorStand.setVisible(false);
+        armorStand.setVisible(true);
         armorStand.setGravity(false);
         armorStand.setCollidable(false);
         return armorStand;
     }
 
-    private void playEssence() {
-        essence = locationUtils.advanceToPoint(0.9);
+    private void playEssence(Location targetLocation) {
+        //TODO: Essence isn't updating correctly, or at all. Fix?
+        essence = LocationUtils.advanceToPoint(vector, targetLocation, origin, 1);
         armorStand.teleport(essence);
 
         if (Math.random() < 0.05) {

@@ -4,7 +4,7 @@ import com.projectkorra.projectkorra.GeneralMethods;
 import com.projectkorra.projectkorra.ability.AddonAbility;
 import com.projectkorra.projectkorra.util.DamageHandler;
 import me.numin.spirits2.Spirits2;
-import me.numin.spirits2.abilities.LightAbility;
+import me.numin.spirits2.abilities.DarkAbility;
 import me.numin.spirits2.enumerations.AbilityType;
 import me.numin.spirits2.enumerations.ActivationType;
 import me.numin.spirits2.enumerations.SpiritType;
@@ -20,14 +20,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-public class DarkBlast extends LightAbility implements AddonAbility {
+public class DarkBlast extends DarkAbility implements AddonAbility {
 
     private ActivationType activationType;
     private Entity target;
     private Location blastLocation;
     private Location origin;
-    private Particle.DustOptions pink;
-    private Particle.DustOptions white;
+    private Particle.DustOptions purple;
+    private Particle.DustOptions black;
     private RemovalPolicy removalPolicy;
     private Vector direction;
 
@@ -78,12 +78,12 @@ public class DarkBlast extends LightAbility implements AddonAbility {
         potionDuration = 3;
         potionPower = 1;
 
-        blastLocation = player.getEyeLocation().add(0, 1, 0);
+        blastLocation = player.getEyeLocation().add(0, 0, 0);
         direction = player.getLocation().getDirection();
         origin = player.getLocation();
         removalPolicy = new RemovalPolicy(this, player);
-        pink = new Particle.DustOptions(Color.fromRGB(255, 160, 160), 1);
-        white = new Particle.DustOptions(Color.fromRGB(255, 255, 255), 1);
+        purple = new Particle.DustOptions(Color.fromRGB(150, 0, 216), 1);
+        black = new Particle.DustOptions(Color.fromRGB(0, 0, 0), 1);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class DarkBlast extends LightAbility implements AddonAbility {
             for (Entity entity : GeneralMethods.getEntitiesAroundPoint(blastLocation, radius)) {
                 if (entity instanceof LivingEntity && !entity.getUniqueId().equals(player.getUniqueId()) && !(entity instanceof ArmorStand)) {
                     DamageHandler.damageEntity(entity, damage, this);
-                    player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, ((LivingEntity) entity).getEyeLocation(), 10, 0, 0, 0, 0.2);
+                    player.getWorld().spawnParticle(Particle.DRAGON_BREATH, target.getLocation().add(0, 1, 0), 10, 0, 0, 0, 0.2);
                     remove();
                 }
             }
@@ -121,7 +121,7 @@ public class DarkBlast extends LightAbility implements AddonAbility {
             if (!hasReached) {
                 blastLocation = new LocationUtils(player.getEyeLocation(), target.getLocation().add(0, 1, 0)).advanceToPoint(0.3);
 
-                player.getWorld().spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.1, 0.1, 0.1, pink);
+                player.getWorld().spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.1, 0.1, 0.1, purple);
 
                 if (player.getLocation().distance(target.getLocation()) > range ||
                         origin.distance(target.getLocation()) > range ||
@@ -138,7 +138,8 @@ public class DarkBlast extends LightAbility implements AddonAbility {
                 }
             } else {
                 LivingEntity livingEntity = (LivingEntity) target;
-                livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * potionDuration, 20 * potionPower, false, true, false));
+                livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON,
+                        20 * this.potionDuration, this.potionPower, false, true, false));
                 remove();
             }
         }
@@ -149,15 +150,15 @@ public class DarkBlast extends LightAbility implements AddonAbility {
             direction = player.getLocation().getDirection();
 
         blastLocation = new LocationUtils(blastLocation, direction).advanceToDirection(1);
-        player.spawnParticle(Particle.END_ROD, blastLocation, 2, 0.1, 0.1, 0.1, 0);
-        player.spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.2, 0.2, 0.2, white);
+        player.getWorld().spawnParticle(Particle.TOWN_AURA, blastLocation, 10, 0.1, 0.1, 0.1, 1);
+        player.spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.2, 0.2, 0.2, black);
 
         if (isHealing)
-            player.spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.2, 0.2, 0.2, pink);
+            player.spawnParticle(Particle.REDSTONE, blastLocation, 2, 0.2, 0.2, 0.2, purple);
 
         if (canBurst) {
             canBurst = false;
-            player.spawnParticle(Particle.FIREWORKS_SPARK, blastLocation, 10, 0, 0, 0, 0.1);
+            player.getWorld().spawnParticle(Particle.DRAGON_BREATH, blastLocation, 10, 0, 0, 0, 0.1);
         }
 
         if (origin.distance(blastLocation) > range || GeneralMethods.isSolid(blastLocation.getBlock()) || blastLocation.getBlock().isLiquid()) {
@@ -167,7 +168,9 @@ public class DarkBlast extends LightAbility implements AddonAbility {
 
     public void showSelectedTarget() {
         if (target != null)
-            target.getWorld().spawnParticle(Particle.REDSTONE, target.getLocation().add(0, 1, 0), 2, 0.5, 1, 0.5, white);
+            player.getWorld().spawnParticle(
+                    Particle.TOWN_AURA, target.getLocation().add(0, 1, 0),
+                    10, 0.5, 1, 0.5, 0);
     }
 
     @Override
@@ -202,7 +205,7 @@ public class DarkBlast extends LightAbility implements AddonAbility {
 
     @Override
     public Location getLocation() {
-        return null;
+        return blastLocation;
     }
 
     @Override

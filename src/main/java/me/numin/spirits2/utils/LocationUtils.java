@@ -35,7 +35,17 @@ public class LocationUtils {
         if (destination == null || location == null)
             return null;
 
-        vector.add(destination.toVector().subtract(location.toVector()).multiply(speed).normalize());
-        return location.clone().add(vector.clone().multiply(speed));
+        vector.add(destination.toVector()).subtract(location.toVector()).multiply(speed).normalize();
+        location.add(vector.clone().multiply(speed));
+        return location;
+    }
+
+    public static Location advanceToPoint(Vector vector, Location destination, Location location, double speed) {
+        if (destination == null || location == null)
+            return null;
+
+        vector.add(destination.toVector()).subtract(location.toVector()).multiply(speed).normalize();
+        location.add(vector.clone().multiply(speed));
+        return location;
     }
 }
