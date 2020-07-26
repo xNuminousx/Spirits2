@@ -15,6 +15,7 @@ import me.numin.spirits2.utils.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
+import sun.security.provider.ConfigFile;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,15 +50,15 @@ public class Levitation  extends SpiritAbility implements AddonAbility, ComboAbi
     }
 
     public void setFields() {
-        cooldown = 0;
-        duration = 5000;
-        range = 7;
-        allowedHealthLoss = 4;
-        doDynamicCooldowns = true;
-        applyLevitationCD = true;
-        levitationMultiplier = 4;
-        applyPhaseCD = true;
-        phaseMultiplier = 4;
+        cooldown = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Combo.Levitation.Cooldown");
+        duration = Spirits2.getInstance().getConfig().getLong("Abilities.Neutral.Combo.Levitation.Duration");
+        range = Spirits2.getInstance().getConfig().getDouble("Abilities.Neutral.Combo.Levitation.Range");
+        allowedHealthLoss = Spirits2.getInstance().getConfig().getDouble("Abilities.Neutral.Combo.Levitation.AllowedHealthLoss");
+        doDynamicCooldowns = Spirits2.getInstance().getConfig().getBoolean("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.Enabled");
+        applyLevitationCD = Spirits2.getInstance().getConfig().getBoolean("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.DoLevitation");
+        levitationMultiplier = Spirits2.getInstance().getConfig().getDouble("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.LevitationMultiplier");
+        applyPhaseCD = Spirits2.getInstance().getConfig().getBoolean("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.DoPhase");
+        phaseMultiplier = Spirits2.getInstance().getConfig().getDouble("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.PhaseMultiplier");
 
         initialHealth = player.getHealth();
         origin = player.getLocation();
