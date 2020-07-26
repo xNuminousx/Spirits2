@@ -8,9 +8,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class SpiritsCommand extends PKCommand {
+
+    private final List<String> abilityHelperAliases = Arrays.asList("ability", "abilities", "abil", "a");
 
     public SpiritsCommand() {
         super("spirits", "/bending spirits", "Opens up Spirits guide.", new String[] {"s", "sp", "spirit", "spirits"});
@@ -32,12 +35,15 @@ public class SpiritsCommand extends PKCommand {
             cmdSender.sendMessage("");
             cmdSender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Commands:");
             cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits " + ChatColor.GRAY + "Opens this prompt.");
-            cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits abilities " + ChatColor.GRAY + "Opens an Ability Helper to help with understanding and binding abilities.");
+            cmdSender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "- Aliases: s, sp, spirit, spirits");
+            cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits abil " + ChatColor.GRAY + "Opens an Ability Helper to help with understanding and binding abilities.");
+            cmdSender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "- Aliases: a, abil, ability, abilities");
             cmdSender.sendMessage("");
 
             if (cmdSender.hasPermission("bending.command.spirits.admin")) {
                 cmdSender.sendMessage(ChatColor.DARK_RED + "" + ChatColor.BOLD + "Admin Commands:");
                 cmdSender.sendMessage(ChatColor.RED + "/b config <plugin> <ability> " + ChatColor.GRAY + "Displays config variables for an ability. Do '/b config' for more information.");
+                cmdSender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "- Aliases: con, config, configs, getconfig");
                 cmdSender.sendMessage("");
             }
 
@@ -45,7 +51,7 @@ public class SpiritsCommand extends PKCommand {
         } else if (list.size() == 1) {
             String arg = list.get(0);
 
-            if (arg.equalsIgnoreCase("abilities")) {
+            if (abilityHelperAliases.contains(arg)) {
                 AbilityHelperListener.abilityHelper = new AbilityHelper((Player)cmdSender);
             }
         }

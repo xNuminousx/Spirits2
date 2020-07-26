@@ -11,7 +11,10 @@ import me.numin.spirits2.listeners.ProjectKorraListener;
 import me.numin.spirits2.utils.SpiritElement;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 public final class Spirits2 extends JavaPlugin {
 
@@ -41,6 +44,16 @@ public final class Spirits2 extends JavaPlugin {
 
     public static Spirits2 getInstance() {
         return plugin;
+    }
+
+    public List<CoreAbility> getSpiritAbilities() {
+        List<CoreAbility> spiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.SPIRIT);
+        List<CoreAbility> lightSpiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.LIGHT_SPIRIT);
+        List<CoreAbility> darkSpiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.DARK_SPIRIT);
+
+        List<CoreAbility> allAbilities = new ArrayList<>();
+        Stream.of(spiritAbilities, lightSpiritAbilities, darkSpiritAbilities).forEach(allAbilities::addAll);
+        return allAbilities;
     }
 
     public void registerCommands() {

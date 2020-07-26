@@ -2,13 +2,7 @@ package me.numin.spirits2.inventories;
 
 import com.projectkorra.projectkorra.ability.Ability;
 import com.projectkorra.projectkorra.ability.CoreAbility;
-import me.numin.spirits2.abilities.dark.combos.Infest;
-import me.numin.spirits2.abilities.dark.DarkBlast;
-import me.numin.spirits2.abilities.light.LightBlast;
-import me.numin.spirits2.abilities.light.combos.Rejuvenation;
-import me.numin.spirits2.abilities.spirit.Dash;
-import me.numin.spirits2.abilities.spirit.Possess;
-import me.numin.spirits2.abilities.spirit.Vanish;
+import me.numin.spirits2.Spirits2;
 import me.numin.spirits2.utils.InventoryCreator;
 import me.numin.spirits2.utils.SpiritElement;
 import org.bukkit.ChatColor;
@@ -25,16 +19,13 @@ public class AbilityHelper {
     public AbilityHelper(Player player) {
         inventoryCreator = new InventoryCreator(player, getInventoryName(), 54);
 
-        Ability[] abilities = new Ability[]{
-                CoreAbility.getAbility(Dash.class), CoreAbility.getAbility(Possess.class), CoreAbility.getAbility(Vanish.class),
-                CoreAbility.getAbility(LightBlast.class), CoreAbility.getAbility(Rejuvenation.class),
-                CoreAbility.getAbility(DarkBlast.class), CoreAbility.getAbility(Infest.class)
-        };
-        for (int i = 0; i <= abilities.length - 1; i++) {
-            if (abilities[i] == null || i >= inventoryCreator.getSlots())
+        //TODO: Abilities are loading in randomly. Sort them by element.
+        List<CoreAbility> spiritAbilities = Spirits2.getInstance().getSpiritAbilities();
+        for (int i = 0; i <= spiritAbilities.size() - 1; i++) {
+            if (spiritAbilities.get(i) == null || i >= inventoryCreator.getSlots())
                 break;
 
-            Ability ability = abilities[i];
+            Ability ability = spiritAbilities.get(i);
             String name = ability.getElement().getColor() + "" + ChatColor.BOLD + ability.getName();
             List<String> lore = Collections.singletonList("Click for more information!");
             Material icon = null;

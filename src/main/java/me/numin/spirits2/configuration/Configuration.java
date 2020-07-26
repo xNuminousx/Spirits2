@@ -37,6 +37,19 @@ public class Configuration {
         config.addDefault("Abilities.Neutral.Vanish.ParticleDensity", 5);
         config.addDefault("Abilities.Neutral.Vanish.Extinguish", true);
 
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Description", "");
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Instructions", "");
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Enabled", true);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Cooldown", 5000);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Duration", 5000);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.Range", 10);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.AllowedHealthLoss", 4);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.Enabled", true);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.DoPhase", true);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.PhaseMultiplier", 4);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.DoLevitation", true);
+        config.addDefault("Abilities.Neutral.Combo.Levitation.DynamicCooldowns.LevitationMultiplier", 4);
+
         config.addDefault("Abilities.Neutral.Combo.Phase.Description", "Dissolve your essence entirely to achieve invisibility and flight for a short duration of time.");
         config.addDefault("Abilities.Neutral.Combo.Phase.Instructions", "Left-click with Vanish twice.");
         config.addDefault("Abilities.Neutral.Combo.Phase.Enabled", true);
