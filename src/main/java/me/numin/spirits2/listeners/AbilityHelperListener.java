@@ -4,6 +4,7 @@ import com.projectkorra.projectkorra.BendingPlayer;
 import com.projectkorra.projectkorra.ability.Ability;
 import com.projectkorra.projectkorra.ability.CoreAbility;
 import me.numin.spirits2.inventories.AbilityHelper;
+import me.numin.spirits2.utils.SpiritElement;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ public class AbilityHelperListener implements Listener {
 
     public static AbilityHelper abilityHelper;
 
+    //TODO: Fix colors of descriptions and such... Messed UP!
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player)event.getWhoClicked();
@@ -24,7 +26,7 @@ public class AbilityHelperListener implements Listener {
         if (bPlayer == null || abilityHelper == null)
             return;
 
-        if (!event.getView().getTitle().equalsIgnoreCase(abilityHelper.getInventoryName())) {
+        if (!event.getView().getTitle().equalsIgnoreCase(abilityHelper.getName())) {
             return;
         }
 
@@ -46,13 +48,13 @@ public class AbilityHelperListener implements Listener {
 
         ChatColor eleColor = ability.getElement().getColor();
 
-        player.sendMessage(eleColor + "" + ChatColor.BOLD + itemName);
+        player.sendMessage(SpiritElement.getSecondaryColor(ability.getElement()) + "" + ChatColor.BOLD + itemName);
         player.sendMessage("");
         player.sendMessage(ability.getDescription());
         player.sendMessage("");
-        player.sendMessage(eleColor + "" + ChatColor.BOLD + "Instructions: " + ChatColor.GRAY + ability.getInstructions());
+        player.sendMessage(SpiritElement.getSecondaryColor(ability.getElement()) + "" + ChatColor.BOLD + "Instructions: " + eleColor + ability.getInstructions());
         player.sendMessage("");
         player.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "To bind this ability, use this command: /bending bind " + ability.getName().toLowerCase());
-        abilityHelper.getInventoryCreator().closeInventory();
+        abilityHelper.getInventory().closeInventory();
     }
 }

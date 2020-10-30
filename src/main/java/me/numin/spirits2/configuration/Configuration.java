@@ -58,6 +58,13 @@ public class Configuration {
         config.addDefault("Abilities.Neutral.Combo.Phase.Duration", 2000);
         config.addDefault("Abilities.Neutral.Combo.Phase.MinimumHealth", 3);
 
+        config.addDefault("Language.Prefixes.Spirit.Prefix", "[Spirit]");
+        config.addDefault("Language.Prefixes.Spirit.Color", "DARK_AQUA");
+        config.addDefault("Language.Prefixes.LightSpirit.Prefix", "[LightSpirit]");
+        config.addDefault("Language.Prefixes.LightSpirit.Color", "AQUA");
+        config.addDefault("Language.Prefixes.DarkSpirit.Prefix", "[DarkSpirit]");
+        config.addDefault("Language.Prefixes.DarkSpirit.Color", "BLUE");
+
         config.options().copyDefaults(true);
         plugin.saveConfig();
     }

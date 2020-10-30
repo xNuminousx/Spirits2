@@ -77,16 +77,12 @@ public class ConfigCommand extends PKCommand {
         Set<String> configKeys;
 
         if (pkAliases.contains(plugin)) {
-            elementName = element instanceof Element.SubElement ?
-                    ((Element.SubElement)element).getParentElement().getName() :
-                    element.getName();
+            elementName = element instanceof Element.SubElement ? ((Element.SubElement)element).getParentElement().getName() : element.getName();
             configPath = "Abilities." + elementName + "." + ability.getName();
             configKeys = ProjectKorra.plugin.getConfig().getKeys(true);
         } else {
             elementName = getSpiritElementString(ability.getElement());
-            configPath = ability instanceof ComboAbility ?
-                    "Abilities." + elementName + ".Combo." + ability.getName() :
-                    "Abilities." + elementName + "." + ability.getName();
+            configPath = ability instanceof ComboAbility ? "Abilities." + elementName + ".Combo." + ability.getName() : "Abilities." + elementName + "." + ability.getName();
             configKeys = Spirits2.getInstance().getConfig().getKeys(true);
         }
 
@@ -98,14 +94,9 @@ public class ConfigCommand extends PKCommand {
                 String[] parts = key.split(Pattern.quote("."));
 
                 String label = parts[parts.length - 1];
-                value = pkAliases.contains(plugin) ?
-                        ProjectKorra.plugin.getConfig().get(key) :
-                        Spirits2.getInstance().getConfig().get(key);
+                value = pkAliases.contains(plugin) ? ProjectKorra.plugin.getConfig().get(key) : Spirits2.getInstance().getConfig().get(key);
 
-                if (value == null ||
-                        value instanceof MemorySection ||
-                        label.equalsIgnoreCase("Description") ||
-                        label.equalsIgnoreCase("Instructions"))
+                if (value == null || value instanceof MemorySection || label.equalsIgnoreCase("Description") || label.equalsIgnoreCase("Instructions"))
                     continue;
 
                 if (parts.length >= 5) {

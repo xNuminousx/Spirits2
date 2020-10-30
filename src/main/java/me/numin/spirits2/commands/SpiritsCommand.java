@@ -36,7 +36,7 @@ public class SpiritsCommand extends PKCommand {
             cmdSender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "Commands:");
             cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits " + ChatColor.GRAY + "Opens this prompt.");
             cmdSender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "- Aliases: s, sp, spirit, spirits");
-            cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits abil " + ChatColor.GRAY + "Opens an Ability Helper to help with understanding and binding abilities.");
+            cmdSender.sendMessage(ChatColor.YELLOW + "/b spirits abil " + ChatColor.GRAY + "Opens an ability helper interface.");
             cmdSender.sendMessage(ChatColor.GRAY + "" + ChatColor.ITALIC + "- Aliases: a, abil, ability, abilities");
             cmdSender.sendMessage("");
 

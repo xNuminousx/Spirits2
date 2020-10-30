@@ -1,4 +1,4 @@
-package me.numin.spirits2.utils;
+package me.numin.spirits2.inventories;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

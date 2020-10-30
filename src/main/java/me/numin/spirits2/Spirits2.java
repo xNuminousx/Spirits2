@@ -47,12 +47,20 @@ public final class Spirits2 extends JavaPlugin {
     }
 
     public List<CoreAbility> getSpiritAbilities() {
-        List<CoreAbility> spiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.SPIRIT);
-        List<CoreAbility> lightSpiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.LIGHT_SPIRIT);
-        List<CoreAbility> darkSpiritAbilities = CoreAbility.getAbilitiesByElement(SpiritElement.DARK_SPIRIT);
+        return CoreAbility.getAbilitiesByElement(SpiritElement.SPIRIT);
+    }
 
+    public List<CoreAbility> getDarkSpiritAbilities() {
+        return CoreAbility.getAbilitiesByElement(SpiritElement.DARK_SPIRIT);
+    }
+
+    public List<CoreAbility> getLightSpiritAbilities() {
+        return CoreAbility.getAbilitiesByElement(SpiritElement.LIGHT_SPIRIT);
+    }
+
+    public List<CoreAbility> getPluginAbilities() {
         List<CoreAbility> allAbilities = new ArrayList<>();
-        Stream.of(spiritAbilities, lightSpiritAbilities, darkSpiritAbilities).forEach(allAbilities::addAll);
+        Stream.of(getSpiritAbilities(), getLightSpiritAbilities(), getDarkSpiritAbilities()).forEach(allAbilities::addAll);
         return allAbilities;
     }
 

@@ -15,7 +15,6 @@ import me.numin.spirits2.utils.StringUtils;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
-import sun.security.provider.ConfigFile;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -127,14 +126,12 @@ public class Levitation  extends SpiritAbility implements AddonAbility, ComboAbi
 
     @Override
     public long getCooldown() {
-        if (!doDynamicCooldowns) {
-            return cooldown;
-        } else {
+        if (doDynamicCooldowns) {
             duration = System.currentTimeMillis() - time;
             if (applyLevitationCD)
                 return (long) (duration * levitationMultiplier);
             else return cooldown;
-        }
+        } else return cooldown;
     }
 
     @Override

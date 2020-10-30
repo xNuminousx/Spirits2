@@ -1,10 +1,10 @@
 name: Spirits2
 version: ${project.version}
 main: me.numin.spirits2.Spirits2
-api-version: 1.13
+api-version: 1.16
 depend: [ProjectKorra]
 authors: [Numin]
-description: Spirits reimagined
+description: Spirits reimagined.
 
 permissions:
   bending.spirit:

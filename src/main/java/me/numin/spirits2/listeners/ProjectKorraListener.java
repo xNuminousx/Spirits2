@@ -42,7 +42,7 @@ public class ProjectKorraListener implements Listener {
         if (bPlayer == null || subPicker == null)
             return;
 
-        if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getInventoryName())) {
+        if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getName())) {
             return;
         }
 
@@ -64,7 +64,7 @@ public class ProjectKorraListener implements Listener {
             event.setCancelled(true);
             return;
         }
-        player.closeInventory();
+        subPicker.getInventory().closeInventory();
     }
 
     @EventHandler
@@ -75,7 +75,7 @@ public class ProjectKorraListener implements Listener {
         if (bPlayer == null || subPicker == null)
             return;
 
-        if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getInventoryName()))
+        if (!event.getView().getTitle().equalsIgnoreCase(subPicker.getName()))
             return;
 
         if (!hasSelected && bPlayer.hasElement(SpiritElement.SPIRIT)) {
